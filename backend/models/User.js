@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema(
       enum: ["buyer", "seller", "admin"],
       default: "buyer",
     },
+    isVerified: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

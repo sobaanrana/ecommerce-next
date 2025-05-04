@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const transporter = require("../utils/email");
 
 exports.registerUser = async (req, res) => {
   try {
@@ -18,9 +19,27 @@ exports.registerUser = async (req, res) => {
       email,
       password: hashedPassword,
     });
+
+    // res
+    //   .status(201)
+    //   .json({ message: "User created successfully", user: newUser });
+
+    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    const verifyLink = `${process.env.BASE_URL}/api/auth/verify/${token}`;
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Verify your Email",
+      html: `<p>Click <a href="${verifyLink}">here</a> to verify your email.</p>`,
+    });
+
     res
       .status(201)
-      .json({ message: "User created successfully", user: newUser });
+      .json({ message: "User registered. Check email to verify." });
   } catch (err) {
     res.status(500).json({ message: "Signup failed", error: err.message });
   }
@@ -55,5 +74,22 @@ exports.loginUser = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ message: "Login Failed", error: err.message });
+  }
+};
+
+exports.verifyEmail = async (req, res) => {
+  try {
+    const decoded = jwt.verify(req.params.token, process.env.JWT_SECRET); // verify token againt jwt secret key, decoded token payloa - return obj
+    const user = await User.findById(decoded.userId);
+    if (!user) return res.status(404).send("User not found");
+
+    user.isVerified = true;
+    await user.save();
+
+    // res.send("Email verified successfully.");
+
+    res.redirect("http://localhost:3000/verified-success"); // frontend route
+  } catch (err) {
+    res.status(400).send("Invalid or expired token.");
   }
 };
