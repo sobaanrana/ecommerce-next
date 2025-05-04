@@ -1,0 +1,6 @@
+when we change data on the at backedn get errors on teh frontend and the other way around 
+trp
+
+
+npm install @trpc/client @trpc/next @trpc/react-query @trpc/server @tanstack/react-query
+--legacy-peer-deps
