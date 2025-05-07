@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const AuthCredentialsValidator = z.object({
@@ -28,6 +29,8 @@ const page = () => {
     resolver: zodResolver(AuthCredentialsValidator),
   });
 
+  const router = useRouter();
+
   const onSubmit = async ({
     name,
     email,
@@ -43,9 +46,15 @@ const page = () => {
       });
 
       const data = await response.json();
+
       if (!response.ok) {
         throw new Error(data.message || "Something went wrong");
       } // fetch does not automatically throw an error for HTTP status codes like 400, 401, 403, or 500.
+      else {
+        if (router) {
+          router.push(`/verify-email?to=${email} `);
+        }
+      }
     } catch (err) {
       console.log(err.message);
     }

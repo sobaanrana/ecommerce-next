@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const sendVerificationEmail = require("../utils/email");
 const transporter = require("../utils/email");
 
 exports.registerUser = async (req, res) => {
@@ -28,7 +29,9 @@ exports.registerUser = async (req, res) => {
       expiresIn: "1h",
     });
 
-    const verifyLink = `${process.env.BASE_URL}/api/auth/verify/${token}`;
+    // const verifyLink = `${process.env.BASE_URL}/api/auth/verify/${token}`; used when user verified through email using backend url and then redirected to the frontedn from backend
+
+    const verifyLink = `${process.env.BASE_URL}/verify-email?token=${token}`;
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
@@ -36,6 +39,18 @@ exports.registerUser = async (req, res) => {
       subject: "Verify your Email",
       html: `<p>Click <a href="${verifyLink}">here</a> to verify your email.</p>`,
     });
+
+    // Send the verification email via Resend API
+    // try {
+    //   await sendVerificationEmail(email, verifyLink);
+    //   return res
+    //     .status(201)
+    //     .json({ message: "User registered. Check email to verify." });
+    // } catch (err) {
+    //   return res
+    //     .status(500)
+    //     .json({ message: "Error sending verification email" });
+    // }
 
     res
       .status(201)
@@ -86,10 +101,10 @@ exports.verifyEmail = async (req, res) => {
     user.isVerified = true;
     await user.save();
 
-    // res.send("Email verified successfully.");
+    res.status(200).json({ message: "Email verified successfully." });
 
-    res.redirect("http://localhost:3000/verified-success"); // frontend route
+    // res.redirect("http://localhost:3000/verified-success"); // frontend route
   } catch (err) {
-    res.status(400).send("Invalid or expired token.");
+    res.status(400).json({ message: "Invalid or expired token." });
   }
 };
