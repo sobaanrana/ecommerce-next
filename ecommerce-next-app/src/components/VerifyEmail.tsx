@@ -24,7 +24,7 @@ const VerifyEmail = ({ token }: VerifyEmailProps) => {
         throw new Error(data.message || "Something went wrong");
       }
       console.log(data);
-      isLoading(false);
+      setIsLoading(false);
     } catch (err) {
       // token invalid or exprired
       console.log(err.message);

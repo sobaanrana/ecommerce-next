@@ -8,8 +8,10 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { z, ZodError } from "zod";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { useEffect } from "react";
 
 const page = () => {
   const AuthCredentialsValidator = z.object({
@@ -17,7 +19,7 @@ const page = () => {
     password: z
       .string()
       .min(8, { message: "Password must be at least 8 characters long." }),
-    name: z.string(),
+    name: z.string().min(1, { message: "Name is required" }), // Ensures name is not empty
   });
 
   type TAuthCredentialsValidator = z.infer<typeof AuthCredentialsValidator>;
@@ -27,6 +29,7 @@ const page = () => {
     formState: { errors },
   } = useForm<TAuthCredentialsValidator>({
     resolver: zodResolver(AuthCredentialsValidator),
+    mode: "onBlur", // Trigger validation when the user leaves the field (onBlur)
   });
 
   const router = useRouter();
@@ -50,15 +53,31 @@ const page = () => {
       if (!response.ok) {
         throw new Error(data.message || "Something went wrong");
       } // fetch does not automatically throw an error for HTTP status codes like 400, 401, 403, or 500.
-      else {
-        if (router) {
-          router.push(`/verify-email?to=${email} `);
-        }
-      }
+
+      toast.success(`Verification email sent to ${email}`);
+      router.push(`/verify-email?to=${email} `);
     } catch (err) {
       console.log(err.message);
+      // toast.error("This email is already in use. Sign in instead!");
+      toast.error(err.message);
+      handleZodErrors();
     }
   };
+
+  // Handle form errors (Zod validation errors)
+  const handleZodErrors = () => {
+    if (errors) {
+      Object.values(errors).forEach((error) => {
+        if (error && error.message) {
+          toast.error(error.message); // Show the first error message in a toast
+        }
+      });
+    }
+  };
+
+  // useEffect(() => {
+  //   handleZodErrors(); // Handle Zod validation errors
+  // }, [errors]);
 
   return (
     <>
@@ -95,6 +114,11 @@ const page = () => {
                       "focus-visible:ring-red-500": errors.name,
                     })}
                   />
+                  {errors.name && (
+                    <p className="text-sm text-red-500">
+                      {errors.name.message}
+                    </p>
+                  )}
                 </div>
                 <div className="grid gap-1 py-2">
                   <Label htmlFor="email">Email</Label>
@@ -106,6 +130,11 @@ const page = () => {
                       "focus-visible:ring-red-500": errors.email,
                     })}
                   />
+                  {errors.email && (
+                    <p className="text-sm text-red-500">
+                      {errors.email.message}
+                    </p>
+                  )}
                 </div>
                 <div className="grid gap-1 py-2">
                   <Label htmlFor="password">Password</Label>
@@ -117,7 +146,11 @@ const page = () => {
                       "focus-visible:ring-red-500": errors.password,
                     })}
                   />
-                  {/* {errors.password && <p>Password is required.</p>} */}
+                  {errors.password && (
+                    <p className="text-sm text-red-500">
+                      {errors.password.message}
+                    </p>
+                  )}
                 </div>
 
                 <Button>Sign Up</Button>
