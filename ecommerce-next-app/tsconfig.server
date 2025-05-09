@@ -4,3 +4,12 @@ trp
 
 npm install @trpc/client @trpc/next @trpc/react-query @trpc/server @tanstack/react-query
 --legacy-peer-deps
+
+
+convert AuthCredentialsValidator into a separate comp
+
+
+the cookies must be sent directly from the browser to the server , which is not the case when you use nextJs . because when you access to your app next js will server side render your page and then the request will be sent from nextjs server to your nodejs server so the browser will send the cookies to nextjs server not to your nodejs server . the solution is to send cookies manually from nextjs server to nodejs . example with fetchApi and getServerSideProps function:
+
+
+Try server side cookies to get logged in users data in the layout

@@ -1,2 +1,7 @@
 nodemailer smtp
 resend 
+
+request sent to server, gets back token - jswebtoken or db session id
+
+
+do server side cookies

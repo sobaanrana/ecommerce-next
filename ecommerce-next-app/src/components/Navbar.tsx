@@ -7,8 +7,8 @@ import { buttonVariants } from "./ui/button";
 import Cart from "./Cart";
 import { SheetTrigger } from "./ui/sheet";
 
-const Navbar = () => {
-  const user = null;
+const Navbar = ({ user }: { user: object | null }) => {
+  console.log("user in navbar", user);
   return (
     <div className="bg-white sticky z-50 top-0 inset-x-0 h-16">
       <header className="relative bg-white">
@@ -46,7 +46,7 @@ const Navbar = () => {
                   )}
 
                   {user ? (
-                    <p></p>
+                    <UserAccountNav />
                   ) : (
                     <Link
                       href="/sign-up"

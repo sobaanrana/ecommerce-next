@@ -9,7 +9,14 @@ dotenv.config();
 const app = express();
 
 //Middleware
-app.use(cors());
+//
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Allow requests from the frontend
+    credentials: true, // Allow sending cookies if necessary
+  })
+);
+
 app.use(express.json());
 // app.use(bodyParser.json());
 
@@ -19,8 +26,10 @@ app.use(express.json());
 // });
 
 const authRoutes = require("./routes/AuthRoutes");
-const authMiddleware = require("./middleware/authMiddleware");
+
 app.use("/api/auth", authRoutes);
+
+const authMiddleware = require("./middleware/authMiddleware");
 
 app.get("/api/protected", authMiddleware, (req, res) => {
   res.json({

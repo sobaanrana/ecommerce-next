@@ -75,6 +75,7 @@ exports.loginUser = async (req, res) => {
     if (!isMatch)
       return res.status(400).json({ message: "Invalid credentials." });
 
+    // Generate JWT token
     const token = jwt.sign(
       { userId: user._id, role: user.role },
       process.env.JWT_SECRET,
@@ -83,6 +84,13 @@ exports.loginUser = async (req, res) => {
       }
     );
 
+    // Set JWT in HttpOnly, Secure cookie
+    res.cookie("token", token, {
+      httpOnly: true, // Prevents JavaScript access
+      secure: process.env.NODE_ENV === "production", // Only use secure cookies in production (make sure you're using HTTPS in production)
+      maxAge: 7 * 24 * 60 * 60 * 1000, // Expires in 7 days
+      sameSite: "Strict", // Protect against CSRF attacks
+    });
     res.status(200).json({
       token,
       user: { id: user._id, email: user.email, role: user.role },
@@ -96,7 +104,7 @@ exports.verifyEmail = async (req, res) => {
   try {
     const decoded = jwt.verify(req.params.token, process.env.JWT_SECRET); // verify token againt jwt secret key, decoded token payloa - return obj
     const user = await User.findById(decoded.userId);
-    if (!user) return res.status(404).send("User not found");
+    if (!user) return res.status(404).json({ message: "User not found" });
 
     user.isVerified = true;
     await user.save();
@@ -106,5 +114,23 @@ exports.verifyEmail = async (req, res) => {
     // res.redirect("http://localhost:3000/verified-success"); // frontend route
   } catch (err) {
     res.status(400).json({ message: "Invalid or expired token." });
+  }
+};
+
+exports.getLoggedInUser = async (req, res) => {
+  try {
+    // const token = req.cookies.token;
+    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log(decoded);
+    const user = await User.findById(decoded.userId);
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.status(200).json({ user });
+  } catch (err) {
+    res
+      .status(400)
+      .json({ message: "User not found. Invalid or expired token." });
   }
 };
