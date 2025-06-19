@@ -134,3 +134,15 @@ exports.getLoggedInUser = async (req, res) => {
       .json({ message: "User not found. Invalid or expired token." });
   }
 };
+
+exports.logoutUser = (req, res) => {
+  // Clear the cookie containing the JWT token - this is not working with nextjs
+  res.clearCookie("token", {
+    httpOnly: true, // Ensure the cookie is only accessible by the server
+    secure: process.env.NODE_ENV === "production", // Use HTTPS in production
+    sameSite: "Strict", // Protect against CSRF attacks
+  });
+
+  // Respond with a success message
+  res.status(200).json({ message: "Logged out successfully" });
+};

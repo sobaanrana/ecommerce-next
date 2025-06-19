@@ -5,3 +5,11 @@ request sent to server, gets back token - jswebtoken or db session id
 
 
 do server side cookies
+
+i am getting user on client side
+
+
+Creating a separate media collection in the database to store images for products or user profiles is a common and recommended approach, especially in cases where you want to manage and track the media files efficiently. This approach decouples image storage and management from the main product data, making it easier to handle various media-related features like image updates, deletions, and optimizations.
+
+
+can put approvedForSales check for product

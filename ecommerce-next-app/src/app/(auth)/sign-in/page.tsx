@@ -12,12 +12,14 @@ import { z, ZodError } from "zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { useEffect } from "react";
+import { useUser } from "@/hooks/context/userContext";
 
 const page = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const isSeller = searchParams.get("as") === "seller";
   const origin = searchParams.get("origin");
+  const { setUser } = useUser(); // Access the setUser function from context to update the user state globally
 
   const continueAsSeller = () => {
     router.push("?as=seller");
@@ -74,9 +76,13 @@ const page = () => {
 
       // Save the JWT token to the client-side cookie
       document.cookie = `token=${data.token}; path=/; max-age=3600; samesite=strict`;
-
+      router.refresh();
       router.push("/");
       // router.push(`/verify-email?to=${email} `);
+
+      console.log(data, "login data");
+
+      setUser(data.user); // Store the user data globally in context
     } catch (err) {
       console.log(err.message);
       // toast.error(err.message);

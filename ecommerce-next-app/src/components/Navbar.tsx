@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { use, useEffect } from "react";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import Link from "next/link";
 import { Icons } from "./Icons";
@@ -6,9 +7,23 @@ import NavItems from "./NavItems";
 import { buttonVariants } from "./ui/button";
 import Cart from "./Cart";
 import { SheetTrigger } from "./ui/sheet";
+import UserAccountNav from "./UserAccountNav";
+import { useUser } from "@/hooks/context/userContext";
+import { useAuth } from "@/hooks/use-auth";
 
-const Navbar = ({ user }: { user: object | null }) => {
+const Navbar = () => {
+  // const { user, loading, error, signOut, getSignedUserData } = useAuth(); // Get user, loading, error, and signOut from the hook
+
+  const { user, setUser } = useUser(); // Access the user state from context
+
   console.log("user in navbar", user);
+
+  // useEffect(() => {
+  //   // Check if token exists and get user data when the component mounts
+  //   getSignedUserData(); // Call the hook function to get user data
+  //   console.log("nav com runs");
+  // }, []); // Empty dependency array means it runs only on mount
+
   return (
     <div className="bg-white sticky z-50 top-0 inset-x-0 h-16">
       <header className="relative bg-white">
@@ -46,7 +61,7 @@ const Navbar = ({ user }: { user: object | null }) => {
                   )}
 
                   {user ? (
-                    <UserAccountNav />
+                    <UserAccountNav user={user} />
                   ) : (
                     <Link
                       href="/sign-up"

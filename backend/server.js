@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 // const bodyParser = require("body-parser");
+const cloudinary = require("cloudinary").v2;
 
 dotenv.config();
 
@@ -25,9 +26,31 @@ app.use(express.json());
 //   res.send("Ecomm API running");
 // });
 
-const authRoutes = require("./routes/AuthRoutes");
+// Configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+});
 
+// Initialize Stripe
+const Stripe = require("stripe");
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+
+const authRoutes = require("./routes/AuthRoutes");
 app.use("/api/auth", authRoutes);
+
+const productRoutes = require("./routes/ProductRoutes");
+app.use("/api/products", productRoutes);
+
+const mediaRoutes = require("./routes/MediaRoutes");
+app.use("/api/media", mediaRoutes);
+
+const checkoutRoutes = require("./routes/CheckoutRoutes");
+app.use("/api/checkout", checkoutRoutes);
+
+const orderRoutes = require("./routes/OrderRoutes");
+app.use("/api/order", orderRoutes);
 
 const authMiddleware = require("./middleware/authMiddleware");
 
