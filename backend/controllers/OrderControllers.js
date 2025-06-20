@@ -141,6 +141,7 @@ const checkOrderStatus = async (req, res) => {
     return res.status(400).json({ message: "sessionId not provided in query" });
   }
 
+  // TODO : Implement stripe webhook to notify server and update order status accordingly
   try {
     // Fetch the checkout session from Stripe
     const session = await stripe.checkout.sessions.retrieve(sessionId);
@@ -154,11 +155,26 @@ const checkOrderStatus = async (req, res) => {
       const customerDetails = session.customer_details;
 
       // Assuming you have a MongoDB Order model, update the order with the Stripe sessionId and payment status
-      const order = await Order.findById(orderId);
+      const order = await Order.findById(orderId)
+        .populate({
+          path: "items.productId", // Reference to the Product in the items array
+          select: "name price images category", // Fields to populate
+          populate: {
+            path: "images", // Reference to the images in the Media model
+            select: "url", // We only need the URL from the Media model
+          },
+        })
+        .exec();
 
       if (!order) {
         return res.status(404).json({ message: "Order not found" });
       }
+
+      // Restructure the order items by including quantity inside the populated product
+      const transformedItems = order.items.map((item) => ({
+        details: item.productId, // Renaming `productId` to `product`
+        quantity: item.quantity, // Including `quantity` inside the product object
+      }));
 
       // Update the order with the payment status and session details
       order.paymentStatus = "paid";
@@ -176,7 +192,7 @@ const checkOrderStatus = async (req, res) => {
       // });
 
       return res.json({
-        order: order,
+        order: { ...order.toObject(), items: transformedItems },
         customer: customerDetails,
       });
     } else {
