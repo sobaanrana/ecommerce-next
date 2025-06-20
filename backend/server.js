@@ -52,6 +52,9 @@ app.use("/api/checkout", checkoutRoutes);
 const orderRoutes = require("./routes/OrderRoutes");
 app.use("/api/order", orderRoutes);
 
+const receiptEmailRoutes = require("./routes/ReceiptEmailRoutes");
+app.use("/api/send-receipt", receiptEmailRoutes);
+
 const authMiddleware = require("./middleware/authMiddleware");
 
 app.get("/api/protected", authMiddleware, (req, res) => {

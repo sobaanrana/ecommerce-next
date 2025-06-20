@@ -158,7 +158,7 @@ const checkOrderStatus = async (req, res) => {
       const order = await Order.findById(orderId)
         .populate({
           path: "items.productId", // Reference to the Product in the items array
-          select: "name price images category", // Fields to populate
+          select: "name price images category description", // Fields to populate
           populate: {
             path: "images", // Reference to the images in the Media model
             select: "url", // We only need the URL from the Media model

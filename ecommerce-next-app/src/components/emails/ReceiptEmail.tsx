@@ -34,12 +34,18 @@ export const ReceiptEmail = ({
   orderId,
   products,
 }: ReceiptEmailProps) => {
-  const total = products.reduce((acc, curr) => acc + curr.price, 0) + 1;
+  console.log("ReceiptEmail Props:", {
+    email,
+    date,
+    orderId,
+    products,
+  });
+  const total = products.reduce((acc, curr) => acc + curr.details.price, 0) + 1;
 
   return (
     <Html>
       <Head />
-      <Preview>Your DigitalHippo Receipt</Preview>
+      <Preview>Your Order Receipt</Preview>
 
       <Body style={main}>
         <Container style={container}>
@@ -92,11 +98,11 @@ export const ReceiptEmail = ({
           <Section style={productTitleTable}>
             <Text style={productsTitle}>Order Summary</Text>
           </Section>
-          {products.map((product) => {
-            const { image } = product.images[0];
+          {products?.map((product) => {
+            const image = product.details?.images[0];
 
             return (
-              <Section key={product.id}>
+              <Section key={product.details?._id}>
                 <Column style={{ width: "64px" }}>
                   {typeof image !== "string" && image.url ? (
                     <Img
@@ -109,24 +115,26 @@ export const ReceiptEmail = ({
                   ) : null}
                 </Column>
                 <Column style={{ paddingLeft: "22px" }}>
-                  <Text style={productTitle}>{product.name}</Text>
-                  {product.description ? (
+                  <Text style={productTitle}>{product.details?.name}</Text>
+                  {product.details?.description ? (
                     <Text style={productDescription}>
-                      {product.description.length > 50
-                        ? product.description?.slice(0, 50) + "..."
-                        : product.description}
+                      {product.details?.description.length > 50
+                        ? product.details?.description?.slice(0, 50) + "..."
+                        : product.details?.description}
                     </Text>
                   ) : null}
-                  <Link
+                  {/* <Link
                     href={`${process.env.NEXT_PUBLIC_SERVER_URL}/thank-you?orderId=${orderId}`}
                     style={productLink}
                   >
                     Download Asset
-                  </Link>
+                  </Link> */}
                 </Column>
 
                 <Column style={productPriceWrapper} align="right">
-                  <Text style={productPrice}>{formatPrice(product.price)}</Text>
+                  <Text style={productPrice}>
+                    {formatPrice(product.details?.price)}
+                  </Text>
                 </Column>
               </Section>
             );
@@ -176,9 +184,7 @@ export const ReceiptEmail = ({
 };
 
 export const ReceiptEmailHtml = (props: ReceiptEmailProps) =>
-  render(<ReceiptEmail {...props} />, {
-    pretty: true,
-  });
+  render(<ReceiptEmail {...props} />);
 
 const main = {
   fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif',

@@ -1,8 +1,10 @@
 "use client";
 
+import { ReceiptEmailHtml } from "@/components/emails/ReceiptEmail";
 import { useUser } from "@/hooks/context/userContext";
 import { formatPrice } from "@/lib/utils";
 import { Product } from "@/types/product";
+import { sendEmailToBackend } from "@/utils/sendReceiptEmail";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -96,6 +98,65 @@ const ThankyouPage = () => {
     // getOrder();
   }, []);
 
+  const dummyProducts = [
+    {
+      id: "1",
+      name: "Adidas Mens Fab Polo Shirt",
+      price: 30,
+      images: [
+        {
+          url: "https://via.placeholder.com/150",
+        },
+      ],
+      category: "Clothing",
+      description: "A comfortable and breathable polo shirt by Adidas.",
+    },
+    {
+      id: "2",
+      name: "Air Max Invigor Trainers Mens",
+      price: 120,
+      images: [
+        {
+          url: "https://via.placeholder.com/150",
+        },
+      ],
+      category: "Sports",
+      description: "Stylish trainers by Nike with excellent cushioning.",
+    },
+  ];
+
+  // Dummy ReceiptEmailProps
+  const dummyReceiptEmailProps = {
+    email: "testuser@example.com", // Dummy email address
+    date: new Date(), // Current date
+    orderId: "order-12345", // Dummy order ID
+    products: dummyProducts, // Array of dummy products
+  };
+
+  useEffect(() => {
+    const sendReceipt = async () => {
+      if (orderDetails && customerDetails) {
+        try {
+          // Await the receipt email HTML generation
+          const receiptEmailHtml = await ReceiptEmailHtml({
+            email: customerDetails.email,
+            date: new Date(),
+            orderId: orderDetails._id,
+            products: orderDetails.items,
+          });
+
+          console.log("Receipt Email HTML:", receiptEmailHtml);
+
+          // Send the email content to the backend
+          await sendEmailToBackend(receiptEmailHtml);
+        } catch (error) {
+          console.error("Error generating or sending email:", error);
+        }
+      }
+    };
+
+    sendReceipt(); // Calling the async function
+  }, [orderDetails, customerDetails]);
   // TODO : get Order
   return (
     <main className="relative lg:min-h-full">
@@ -108,7 +169,7 @@ const ThankyouPage = () => {
         />
       </div>
 
-      <div>
+      <div className="p-20">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8 lg:py-32 xl:gap-x-24">
           <div className="lg:col-start-2">
             <p className="text-sm font-medium text-blue-600">
