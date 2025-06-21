@@ -9,14 +9,17 @@ if (!fs.existsSync(uploadDir)) {
 }
 
 // Set up multer diskStorage configuration
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadDir); // Specify where to store uploaded files
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname); // Create a unique filename
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, uploadDir); // Specify where to store uploaded files
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + "-" + file.originalname); // Create a unique filename
+//   },
+// });
+
+// Use memory storage to prevent saving files locally
+const storage = multer.memoryStorage();
 
 // Initialize multer with the storage configuration
 const upload = multer({ storage: storage });
