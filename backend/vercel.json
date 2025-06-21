@@ -12,11 +12,9 @@
       "dest": "server.js"
     }
   ],
-  "env": {
-    "MONGO_URI": "@mongo-uri",
-    "CLOUD_NAME": "@cloud-name",
-    "CLOUD_API_KEY": "@cloud-api-key",
-    "CLOUD_API_SECRET": "@cloud-api-secret",
-    "STRIPE_SECRET_KEY": "@stripe-secret-key"
+  "functions": {
+    "api/**.js": {
+      "maxDuration": 60
+    }
   }
 }
