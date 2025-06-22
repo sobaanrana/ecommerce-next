@@ -69,14 +69,17 @@ const ThankyouPage = () => {
     console.log("Session ID:", sessionId);
     console.log("type os sessionId", typeof sessionId);
     try {
-      const response = await fetch(`http://localhost:4000/api/order/status`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          sessionId: sessionId,
-          //   Authorization: `Bearer ${user?.token}`,
-        },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/order/status`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            sessionId: sessionId,
+            //   Authorization: `Bearer ${user?.token}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch payment status");

@@ -16,7 +16,7 @@ const VerifyEmail = ({ token }: VerifyEmailProps) => {
   const verifyToken = async (): Promise<void> => {
     try {
       const response = await fetch(
-        `http://localhost:4000/api/auth/verify/${token}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/verify/${token}`
       );
       const data = response.json();
 

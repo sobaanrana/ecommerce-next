@@ -13,13 +13,16 @@ export const useAuth = () => {
   const signOut = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:4000/api/auth/logout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", // Ensure cookies are sent with the request
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/logout`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include", // Ensure cookies are sent with the request
+        }
+      );
 
       const data = await response.json();
 
@@ -62,14 +65,17 @@ export const useAuth = () => {
     try {
       setLoading(true);
 
-      const response = await fetch("http://localhost:4000/api/auth/user", {
-        method: "GET", // Make sure the method is GET
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Include the JWT token in Authorization header
-        },
-        credentials: "include", // Ensure cookies are sent with the request
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/user`,
+        {
+          method: "GET", // Make sure the method is GET
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Include the JWT token in Authorization header
+          },
+          credentials: "include", // Ensure cookies are sent with the request
+        }
+      );
 
       // Check if the response is ok (status code 200-299)
       if (!response.ok) {

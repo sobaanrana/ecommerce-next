@@ -70,21 +70,24 @@ const Page = () => {
   const createCheckoutSession = async () => {
     try {
       // Send cart items to backend for checkout session
-      const response = await fetch("http://localhost:4000/api/checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user: user?._id || undefined, // If a user is logged in -> id else undefined
-          guest: true || undefined, // Set the guest if a guest is making the checkout
-          items: cartItems, // send product IDs and quantities
-          totalAmount: cartTotal,
-          successUrl: `http://localhost:3000/thank-you?orderId=${orderId}`, // URL to redirect after successful payment
-          cancelUrl: "http://localhost:3000/cancel", // URL to redirect if payment is canceled
-          client_reference_id: orderId,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/checkout`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user: user?._id || undefined, // If a user is logged in -> id else undefined
+            guest: true || undefined, // Set the guest if a guest is making the checkout
+            items: cartItems, // send product IDs and quantities
+            totalAmount: cartTotal,
+            successUrl: `http://localhost:3000/thank-you?orderId=${orderId}`, // URL to redirect after successful payment
+            cancelUrl: "http://localhost:3000/cancel", // URL to redirect if payment is canceled
+            client_reference_id: orderId,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -129,18 +132,21 @@ const Page = () => {
     console.log("Total amount:", cartTotal + fee);
 
     try {
-      const response = await fetch("http://localhost:4000/api/order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: user?._id || undefined, // If a user is logged in -> id else undefined
-          guest: user?._id ? false : true, // Set the guest if a guest is making the checkout
-          items: cartItems, // send product IDs and quantities
-          totalAmount: cartTotal + fee,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/order`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: user?._id || undefined, // If a user is logged in -> id else undefined
+            guest: user?._id ? false : true, // Set the guest if a guest is making the checkout
+            items: cartItems, // send product IDs and quantities
+            totalAmount: cartTotal + fee,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -163,7 +169,7 @@ const Page = () => {
     console.log("Payment status:", pStatus);
     console.log("Order status:", oStatus);
     try {
-      fetch(`http://localhost:4000/api/order/${orderId}`, {
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order/${orderId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

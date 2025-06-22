@@ -27,7 +27,7 @@ const Page = ({ params }: pageProps) => {
   const getProduct = async () => {
     try {
       const response = await fetch(
-        `http://localhost:4000/api/products/${productId}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/${productId}`
       );
       const data = await response.json();
       setProduct(data);

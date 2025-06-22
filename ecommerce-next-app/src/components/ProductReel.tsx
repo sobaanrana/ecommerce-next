@@ -21,9 +21,9 @@ const ProductReel = (props: ProductReelProps) => {
   const fetchProducts = async () => {
     let getUrl = "";
     if (query) {
-      getUrl = `http://localhost:4000/api/products?limit=${query.limit}&category=${query.category}`;
+      getUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/products?limit=${query.limit}&category=${query.category}`;
     } else {
-      getUrl = "http://localhost:4000/api/products?limit=4";
+      getUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/products?limit=4`;
     }
 
     try {
