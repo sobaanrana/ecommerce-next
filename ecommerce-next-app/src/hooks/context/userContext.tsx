@@ -8,8 +8,8 @@ import { getSignedUserData } from "@/lib/getSingedUserData";
 
 // Define the type for the user data
 interface UserContextType {
-  user: any;
-  setUser: React.Dispatch<React.SetStateAction<any>>;
+  user: unknown;
+  setUser: React.Dispatch<React.SetStateAction<unknown>>;
 }
 
 // Create the context with default values
@@ -17,7 +17,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 // UserProvider component that will wrap your layout or components
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<unknown>(null);
   // Fetch user data when the component mounts
   useEffect(() => {
     // Client-side method to get cookies

@@ -19,12 +19,12 @@ const ThankyouPage = () => {
 
   const searchParams = useSearchParams();
 
-  const orderId = searchParams.get("orderId");
-  const { user } = useUser();
+  // const orderId = searchParams.get("orderId");
+  // const { user } = useUser();
 
-  const [orderDetails, setOrderDetails] = useState<any>(null);
+  const [orderDetails, setOrderDetails] = useState<unknown>(null);
 
-  const [customerDetails, setCustomerDetails] = useState<any>(null);
+  const [customerDetails, setCustomerDetails] = useState<unknown>(null);
 
   const transactionFee = 1;
   //   if (!user)
