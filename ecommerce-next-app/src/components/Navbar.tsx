@@ -1,20 +1,18 @@
 "use client";
-import React, { use, useEffect } from "react";
+import React from "react";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import Link from "next/link";
 import { Icons } from "./Icons";
 import NavItems from "./NavItems";
 import { buttonVariants } from "./ui/button";
 import Cart from "./Cart";
-import { SheetTrigger } from "./ui/sheet";
 import UserAccountNav from "./UserAccountNav";
 import { useUser } from "@/hooks/context/userContext";
-import { useAuth } from "@/hooks/use-auth";
 
 const Navbar = () => {
   // const { user, loading, error, signOut, getSignedUserData } = useAuth(); // Get user, loading, error, and signOut from the hook
 
-  const { user, setUser } = useUser(); // Access the user state from context
+  const { user } = useUser(); // Access the user state from context
 
   console.log("user in navbar", user);
 

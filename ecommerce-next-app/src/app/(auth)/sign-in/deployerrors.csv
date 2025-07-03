@@ -1,0 +1,129 @@
+[11:23:01.590] Running build in Washington, D.C., USA (East) – iad1
+[11:23:01.591] Build machine configuration: 2 cores, 8 GB
+[11:23:01.610] Cloning github.com/sobaanrana/ecommerce-next (Branch: main, Commit: d9dd1fa)
+[11:23:01.818] Previous build caches not available
+[11:23:02.201] Cloning completed: 591.000ms
+[11:23:02.490] Running "vercel build"
+[11:23:02.937] Vercel CLI 43.3.0
+[11:23:03.251] Installing dependencies...
+[11:23:19.219] 
+[11:23:19.219] added 527 packages in 16s
+[11:23:19.220] 
+[11:23:19.220] 169 packages are looking for funding
+[11:23:19.220]   run `npm fund` for details
+[11:23:19.286] Detected Next.js version: 15.3.1
+[11:23:19.292] Running "npm run build"
+[11:23:19.407] 
+[11:23:19.407] > ecommerce-next-app@0.1.0 build
+[11:23:19.407] > next build
+[11:23:19.407] 
+[11:23:20.050] Attention: Next.js now collects completely anonymous telemetry regarding usage.
+[11:23:20.051] This information is used to shape Next.js' roadmap and prioritize features.
+[11:23:20.052] You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+[11:23:20.052] https://nextjs.org/telemetry
+[11:23:20.052] 
+[11:23:20.148]    ▲ Next.js 15.3.1
+[11:23:20.148] 
+[11:23:20.175]    Creating an optimized production build ...
+[11:23:42.186]  ✓ Compiled successfully in 19.0s
+[11:23:42.190]    Linting and checking validity of types ...
+[11:23:47.344] 
+[11:23:47.348] Failed to compile.
+[11:23:47.348] 
+[11:23:47.348] ./src/app/(auth)/sign-in/page.tsx
+[11:23:47.348] 11:13  Error: 'ZodError' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.349] 14:10  Error: 'useEffect' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.349] 18:24  Error: React Hook "useSearchParams" is called in function "page" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+[11:23:47.349] 19:18  Error: React Hook "useRouter" is called in function "page" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+[11:23:47.349] 22:23  Error: React Hook "useUser" is called in function "page" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+[11:23:47.350] 44:7  Error: React Hook "useForm" is called in function "page" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+[11:23:47.350] 
+[11:23:47.351] ./src/app/(auth)/sign-up/page.tsx
+[11:23:47.355] 11:13  Error: 'ZodError' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.355] 14:10  Error: 'useEffect' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.356] 30:7  Error: React Hook "useForm" is called in function "page" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+[11:23:47.356] 35:18  Error: React Hook "useRouter" is called in function "page" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+[11:23:47.356] 
+[11:23:47.356] ./src/app/cart/page.tsx
+[11:23:47.360] 9:17  Error: 'use' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.360] 39:9  Warning: The 'cartItems' array makes the dependencies of useMemo Hook (at line 55) change on every render. To fix this, wrap the initialization of 'cartItems' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+[11:23:47.360] 41:9  Error: 'createLineItems' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.360] 111:15  Error: 'error' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.360] 194:6  Warning: React Hook useEffect has a missing dependency: 'createOrder'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+[11:23:47.361] 
+[11:23:47.361] ./src/app/layout.tsx
+[11:23:47.361] 7:10  Error: 'getSignedUser' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.361] 8:10  Error: 'cookies' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.361] 16:7  Error: 'geistMono' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.361] 
+[11:23:47.363] ./src/app/product/[productId]/page.tsx
+[11:23:47.363] 25:42  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+[11:23:47.363] 43:6  Warning: React Hook useEffect has a missing dependency: 'getProduct'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+[11:23:47.368] 
+[11:23:47.368] ./src/app/thank-you/page.tsx
+[11:23:47.368] 6:10  Error: 'Product' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.371] 11:10  Error: 'use' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.371] 22:9  Error: 'orderId' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.371] 23:11  Error: 'user' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.372] 25:52  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+[11:23:47.372] 27:58  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+[11:23:47.372] 132:9  Error: 'dummyReceiptEmailProps' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.372] 
+[11:23:47.373] ./src/components/Cart.tsx
+[11:23:47.373] 5:3  Error: 'SheetDescription' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.373] 20:10  Error: 'use' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.373] 
+[11:23:47.373] ./src/components/CartItem.tsx
+[11:23:47.374] 1:10  Error: 'PRODUCT_CATEGORIES' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.374] 
+[11:23:47.374] ./src/components/ImageSlider.tsx
+[11:23:47.374] 1:10  Error: 'useEffect' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.374] 28:38  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+[11:23:47.375] 
+[11:23:47.375] ./src/components/NavItems.tsx
+[11:23:47.375] 4:8  Error: 'Link' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.375] 
+[11:23:47.375] ./src/components/Navbar.tsx
+[11:23:47.378] 2:17  Error: 'use' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.378] 2:22  Error: 'useEffect' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.378] 9:10  Error: 'SheetTrigger' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.379] 12:10  Error: 'useAuth' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.379] 17:17  Error: 'setUser' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.379] 
+[11:23:47.379] ./src/components/ProductReel.tsx
+[11:23:47.379] 5:10  Error: 'get' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.379] 40:6  Warning: React Hook useEffect has a missing dependency: 'fetchProducts'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+[11:23:47.380] 
+[11:23:47.380] ./src/components/UserAccountNav.tsx
+[11:23:47.380] 11:3  Error: 'DropdownMenuLabel' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.380] 13:10  Error: 'useUser' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.380] 
+[11:23:47.381] ./src/components/VerifyEmail.tsx
+[11:23:47.381] 41:6  Warning: React Hook useEffect has a missing dependency: 'verifyToken'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+[11:23:47.381] 
+[11:23:47.381] ./src/components/emails/ReceiptEmail.tsx
+[11:23:47.381] 281:7  Error: 'productLink' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.382] 
+[11:23:47.382] ./src/components/providers.tsx
+[11:23:47.382] 8:10  Error: 'queryClient' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.382] 8:25  Error: React Hook "useState" is called in function "providers" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+[11:23:47.382] 9:24  Error: React Hook "useState" is called in function "providers" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+[11:23:47.383] 
+[11:23:47.383] ./src/get-payload.ts
+[11:23:47.383] 23:25  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+[11:23:47.383] 26:23  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+[11:23:47.383] 
+[11:23:47.383] ./src/hooks/context/userContext.tsx
+[11:23:47.384] 4:10  Error: 'cookies' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.384] 6:10  Error: 'useAuth' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.384] 11:9  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+[11:23:47.384] 12:48  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+[11:23:47.384] 20:36  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+[11:23:47.384] 
+[11:23:47.385] ./src/utils/sendReceiptEmail.tsx
+[11:23:47.385] 1:10  Error: 'ReceiptEmailHtml' is defined but never used.  @typescript-eslint/no-unused-vars
+[11:23:47.385] 
+[11:23:47.385] info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+[11:23:47.397] Error: Command "npm run build" exited with 1
+[11:23:47.675] 
+[11:23:50.788] Exiting build container

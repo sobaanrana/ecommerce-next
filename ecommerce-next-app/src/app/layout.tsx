@@ -4,8 +4,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "sonner";
-import { getSignedUser } from "@/lib/getSingedUser";
-import { cookies } from "next/headers";
+// import { getSignedUser } from "@/lib/getSingedUser";
+// import { cookies } from "next/headers";
 import { UserProvider } from "@/hooks/context/userContext";
 
 const geistSans = Geist({
@@ -13,10 +13,10 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   title: "Create Next App",

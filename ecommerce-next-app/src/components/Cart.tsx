@@ -2,7 +2,6 @@
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -17,7 +16,7 @@ import Image from "next/image";
 import { useCart } from "@/hooks/use-cart";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import CartItem from "./CartItem";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const Cart = () => {
   const { items } = useCart();

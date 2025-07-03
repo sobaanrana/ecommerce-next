@@ -278,11 +278,11 @@ const productDescription = {
   ...resetText,
 };
 
-const productLink = {
-  fontSize: "12px",
-  color: "rgb(0,112,201)",
-  textDecoration: "none",
-};
+// const productLink = {
+//   fontSize: "12px",
+//   color: "rgb(0,112,201)",
+//   textDecoration: "none",
+// };
 
 const productPriceTotal = {
   margin: "0",

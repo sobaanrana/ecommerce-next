@@ -22,7 +22,7 @@ const BREADCRUMBS = [
 const Page = ({ params }: pageProps) => {
   const { productId } = React.use(params);
 
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<unknown>(null);
 
   const getProduct = async () => {
     try {

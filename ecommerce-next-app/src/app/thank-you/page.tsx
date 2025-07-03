@@ -3,12 +3,12 @@
 import { ReceiptEmailHtml } from "@/components/emails/ReceiptEmail";
 import { useUser } from "@/hooks/context/userContext";
 import { formatPrice } from "@/lib/utils";
-import { Product } from "@/types/product";
+// import { Product } from "@/types/product";
 import { sendEmailToBackend } from "@/utils/sendReceiptEmail";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // interface PageProps {
 //   searchParams: { [key: string]: string | string[] | undefined };
@@ -17,14 +17,14 @@ import { use, useEffect, useState } from "react";
 const ThankyouPage = () => {
   //   const orderId = searchParams?.orderId;
 
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
-  const orderId = searchParams.get("orderId");
-  const { user } = useUser();
+  // const orderId = searchParams.get("orderId");
+  // const { user } = useUser();
 
-  const [orderDetails, setOrderDetails] = useState<any>(null);
+  const [orderDetails, setOrderDetails] = useState<unknown>(null);
 
-  const [customerDetails, setCustomerDetails] = useState<any>(null);
+  const [customerDetails, setCustomerDetails] = useState<unknown>(null);
 
   const transactionFee = 1;
   //   if (!user)

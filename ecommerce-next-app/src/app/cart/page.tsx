@@ -14,7 +14,7 @@ const stripePromise = loadStripe(
   "pk_test_51Rb2SICBhoJihabNxBRyKiMxwFNgmZ8myXtjXmEtKm9RCLGLubyuNHpNOWBimg1jLKVhGrOhTAq6sDg6Uj2NTxLw00qKiUE9l8"
 ); // Load Stripe.js with your public key
 
-const Page = () => {
+const CartPage = () => {
   const { items } = useCart();
 
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -36,9 +36,25 @@ const Page = () => {
 
   //   const cartItems = items?.map(item => {item._id, })
 
-  const cartItems = [];
+  const cartItems: unknown = [];
 
-  const createLineItems = useMemo(() => {
+  // const createLineItems = useMemo(() => {
+  //   items?.forEach((item) => {
+  //     const existingItemIndex = cartItems?.findIndex(
+  //       (cItem) => cItem.productId === item?._id
+  //     );
+
+  //     if (existingItemIndex !== -1) {
+  //       // If the item already exists in the cart, increase the quantity
+  //       cartItems[existingItemIndex].quantity += 1;
+  //     } else {
+  //       // If the item doesn't exist in the cart, add it with quantity 1
+  //       cartItems.push({ productId: item._id, quantity: 1 });
+  //     }
+  //   });
+  // }, [items, cartItems]);
+
+  const createLineItems = () => {
     items?.forEach((item) => {
       const existingItemIndex = cartItems?.findIndex(
         (cItem) => cItem.productId === item?._id
@@ -52,7 +68,7 @@ const Page = () => {
         cartItems.push({ productId: item._id, quantity: 1 });
       }
     });
-  }, [items, cartItems]);
+  };
 
   console.log("cartItems are", cartItems);
   //   const createLineItems = () => {
@@ -68,6 +84,8 @@ const Page = () => {
   //   };
 
   const createCheckoutSession = async () => {
+    createLineItems(); // Create line items from cart items
+
     try {
       // Send cart items to backend for checkout session
       const response = await fetch(
@@ -114,10 +132,10 @@ const Page = () => {
 
       console.log("order is", orderId);
 
-      //   if (error) {
-      //     console.error("Stripe checkout error:", error);
-      //     // Handle any errors that occur during the redirect
-      //   }
+      if (error) {
+        console.error("Stripe checkout error:", error);
+        // Handle any errors that occur during the redirect
+      }
     } catch (error) {
       console.error("Checkout error:", error);
       //   setIsLoading(true);
@@ -366,4 +384,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default CartPage;

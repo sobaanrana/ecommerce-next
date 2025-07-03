@@ -2,7 +2,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import ProductListing from "./ProductListing";
-import { get } from "http";
 
 interface ProductReelProps {
   title: string;
