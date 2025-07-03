@@ -13,7 +13,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { useUser } from "@/hooks/context/userContext";
 
-const page = () => {
+const SignInPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const isSeller = searchParams.get("as") === "seller";
@@ -201,4 +201,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SignInPage;

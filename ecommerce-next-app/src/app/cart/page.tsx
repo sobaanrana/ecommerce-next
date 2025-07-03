@@ -14,7 +14,7 @@ const stripePromise = loadStripe(
   "pk_test_51Rb2SICBhoJihabNxBRyKiMxwFNgmZ8myXtjXmEtKm9RCLGLubyuNHpNOWBimg1jLKVhGrOhTAq6sDg6Uj2NTxLw00qKiUE9l8"
 ); // Load Stripe.js with your public key
 
-const Page = () => {
+const CartPage = () => {
   const { items } = useCart();
 
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -366,4 +366,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default CartPage;

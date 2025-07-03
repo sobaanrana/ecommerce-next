@@ -12,7 +12,7 @@ import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-const page = () => {
+const SignUpPage = () => {
   const AuthCredentialsValidator = z.object({
     email: z.string().email(),
     password: z
@@ -165,4 +165,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SignUpPage;
