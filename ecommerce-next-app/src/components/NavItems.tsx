@@ -25,8 +25,10 @@ const NavItems = () => {
 
   const isAnyOpen = activeIndex !== null;
 
-  const navRef = useRef<HTMLDivElement | null>();
-  useOnClickOutside(navRef, () => setActiveIndex(null));
+  const navRef = useRef<HTMLDivElement>(null);
+  useOnClickOutside(navRef as React.RefObject<HTMLElement>, () =>
+    setActiveIndex(null)
+  );
 
   return (
     <div className="flex gap-4 h-full" ref={navRef}>

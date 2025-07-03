@@ -9,6 +9,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 import { loadStripe } from "@stripe/stripe-js";
+import { User } from "@/types/user";
 
 const stripePromise = loadStripe(
   "pk_test_51Rb2SICBhoJihabNxBRyKiMxwFNgmZ8myXtjXmEtKm9RCLGLubyuNHpNOWBimg1jLKVhGrOhTAq6sDg6Uj2NTxLw00qKiUE9l8"
@@ -16,6 +17,8 @@ const stripePromise = loadStripe(
 
 const CartPage = () => {
   const { items } = useCart();
+
+  console.log("items in cart page", items);
 
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
@@ -30,13 +33,13 @@ const CartPage = () => {
 
   const fee = 1;
 
-  const { user } = useUser(); // Access the user state from context
+  const { user } = useUser() as { user: User | null };
 
   console.log("user is", user);
 
   //   const cartItems = items?.map(item => {item._id, })
 
-  const cartItems: unknown = [];
+  const cartItems: { productId: string; quantity: number }[] = [];
 
   // const createLineItems = useMemo(() => {
   //   items?.forEach((item) => {
@@ -178,7 +181,7 @@ const CartPage = () => {
     }
   };
 
-  const updateOrder = (pStatus, oStatus) => {
+  const updateOrder = (pStatus: string, oStatus: string) => {
     // const orderId = localStorage.getItem("orderId");
 
     console.log("cartItems in updateOrder", cartItems);
@@ -258,7 +261,7 @@ const CartPage = () => {
                   const image = product?.images[0];
 
                   return (
-                    <li key={product.id} className="flex py-6 sm:py-10">
+                    <li key={product._id} className="flex py-6 sm:py-10">
                       <div className="flex-shrink-0">
                         <div className="relative h-24 w-24">
                           {typeof image !== "string" && image.url ? (
@@ -278,7 +281,7 @@ const CartPage = () => {
                             <div className="flex justify-between">
                               <h3 className="text-sm">
                                 <Link
-                                  href={`/product/${product.id}`}
+                                  href={`/product/${product._id}`}
                                   className="font-medium text-gray-700 hover:text-gray-800"
                                 >
                                   {product.name}

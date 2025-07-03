@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
 
 // Import Swiper styles
 import "swiper/swiper-bundle.min.css";
@@ -16,8 +17,8 @@ interface ImageSliderProps {
 }
 
 export const ImageSlider = ({ images }: ImageSliderProps) => {
-  // const [swiper, setSwiper] = useState<null | SwiperType>(null);
-  const [swiper, setSwiper] = useState<unknown>(null);
+  console.log("ImageSlider Props:", { images });
+  const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const [slideConfig, setSlideConfig] = useState({
@@ -26,7 +27,7 @@ export const ImageSlider = ({ images }: ImageSliderProps) => {
   });
 
   // Handle slide change and update activeIndex and slideConfig
-  const handleSlideChange = (swiper: unknown) => {
+  const handleSlideChange = (swiper: SwiperType) => {
     setActiveIndex(swiper.activeIndex);
     setSlideConfig({
       isBeginning: swiper.isBeginning,
@@ -85,7 +86,7 @@ export const ImageSlider = ({ images }: ImageSliderProps) => {
               height={200}
               loading="eager"
               className="-z-10 h-full w-full object-cover object-center"
-              src={image.url}
+              src={image}
               alt={`Product image ${index + 1}`}
             />
           </SwiperSlide>

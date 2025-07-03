@@ -12,6 +12,7 @@ export interface Product {
   price: number;
   category: string;
   images: ProductImage[];
+
   stock: number;
   seller: string;
   productStatus: "pending" | "approved" | "denied";

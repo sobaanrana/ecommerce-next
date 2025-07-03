@@ -102,7 +102,7 @@ const Cart = () => {
                 href="/products"
                 className={buttonVariants({
                   variant: "link",
-                  size: "small",
+                  size: "sm",
                   className: "text-sm text-muted-foreground",
                 })}
               >

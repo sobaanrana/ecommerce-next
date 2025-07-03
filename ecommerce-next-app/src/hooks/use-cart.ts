@@ -2,12 +2,12 @@ import { Product } from "@/types/product";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-export type CartItem = {
-  product: Product;
-};
+// export type CartItem = {
+//   product: Product;
+// };
 
 type CartState = {
-  items: CartItem[];
+  items: Product[];
   addItem: (product: Product) => void;
   removeItem: (productId: string, keyIndex: number) => void;
   clearCart: () => void;
@@ -25,14 +25,6 @@ export const useCart = create<CartState>()(
         console.log("Removing item with id:", id, "at index:", keyIndex);
         set((state) => ({
           items: state.items.filter((item, key) => {
-            console.log(
-              "Checking item:",
-              item,
-              "at index:",
-              key,
-              "having id",
-              item?._id
-            );
             return !(key === keyIndex && item._id === id);
           }),
         }));

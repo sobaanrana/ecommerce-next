@@ -1,8 +1,4 @@
-interface sendEmailProps {
-  ReceiptEmailHtml: string;
-}
-
-export const sendEmailToBackend = async (ReceiptEmailHtml: sendEmailProps) => {
+export const sendEmailToBackend = async (receiptEmailHtml: string) => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/send-receipt`,
@@ -12,7 +8,7 @@ export const sendEmailToBackend = async (ReceiptEmailHtml: sendEmailProps) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          emailContent: ReceiptEmailHtml,
+          emailContent: receiptEmailHtml,
           to: "sobaancodes@gmail.com", // Recipient's email address
         }),
       }

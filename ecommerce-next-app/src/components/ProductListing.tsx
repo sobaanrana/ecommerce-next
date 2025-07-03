@@ -42,7 +42,7 @@ const ProductListing = ({ product, index }: ProductListingProps) => {
       href={`/product/${product._id}`}
     >
       <div className="flex flex-col w-full">
-        <ImageSlider images={product.images} />
+        <ImageSlider images={product.images?.map((img) => img.url)} />
 
         <h3 className="mt-4 font-medium text-sm text-gray-700">
           {product.name}

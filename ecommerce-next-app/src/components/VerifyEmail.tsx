@@ -10,7 +10,7 @@ interface VerifyEmailProps {
   token: string;
 }
 const VerifyEmail = ({ token }: VerifyEmailProps) => {
-  const [error, setError] = useState<boolean>(null);
+  const [error, setError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const verifyToken = async (): Promise<void> => {
@@ -18,7 +18,7 @@ const VerifyEmail = ({ token }: VerifyEmailProps) => {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/verify/${token}`
       );
-      const data = response.json();
+      const data = await response.json();
 
       if (!response.ok) {
         throw new Error(data.message || "Something went wrong");
@@ -26,8 +26,12 @@ const VerifyEmail = ({ token }: VerifyEmailProps) => {
       console.log(data);
       setIsLoading(false);
     } catch (err) {
-      // token invalid or exprired
-      console.log(err.message);
+      // token invalid or expired
+      if (err instanceof Error) {
+        console.log(err.message);
+      } else {
+        console.log("Unknown error:", err);
+      }
       setError(true);
     }
   };

@@ -8,11 +8,12 @@ import { buttonVariants } from "./ui/button";
 import Cart from "./Cart";
 import UserAccountNav from "./UserAccountNav";
 import { useUser } from "@/hooks/context/userContext";
+import { User } from "@/types/user";
 
 const Navbar = () => {
   // const { user, loading, error, signOut, getSignedUserData } = useAuth(); // Get user, loading, error, and signOut from the hook
 
-  const { user } = useUser(); // Access the user state from context
+  const { user } = useUser() as { user: User | null };
 
   console.log("user in navbar", user);
 

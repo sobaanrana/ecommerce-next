@@ -4,27 +4,26 @@ import { ImageSlider } from "@/components/ImageSlider";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import ProductReel from "@/components/ProductReel";
 import { formatPrice } from "@/lib/utils";
+import { Product } from "@/types/product";
 import { Check, Shield } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import React from "react";
 
-// interface pageProps {
-//   params: {
-//     productId: string;
-//   };
-// }
+interface pageProps {
+  params: {
+    productId: string;
+  };
+}
 
 const BREADCRUMBS = [
   { id: 1, name: "Home", href: "/" },
   { id: 2, name: "Products", href: "/products" },
 ];
+const Page = ({ params }: pageProps) => {
+  const { productId } = params;
 
-// { params }: pageProps
-const Page = (params) => {
-  const { productId } = React.use(params);
-
-  const [product, setProduct] = useState<unknown>(null);
+  const [product, setProduct] = useState<Product | null>(null);
 
   const getProduct = async () => {
     try {
@@ -85,7 +84,7 @@ const Page = (params) => {
             <section className="mt-4">
               <div className="flex items-center">
                 <p className="font-medium text-gray-900">
-                  {formatPrice(product?.price)}
+                  {formatPrice(product?.price || 0)}
                 </p>
 
                 <div className="ml-4 border-l text-muted-foreground border-gray-300 pl-4">
@@ -114,7 +113,9 @@ const Page = (params) => {
           {/* Product images */}
           <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
             <div className="aspect-square rounded-lg">
-              <ImageSlider images={product?.images} />
+              <ImageSlider
+                images={product?.images?.map((img) => img.url) ?? []}
+              />
             </div>
           </div>
 
@@ -123,7 +124,7 @@ const Page = (params) => {
           <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
             <div>
               <div className="mt-10">
-                <AddToCartButton product={product} />
+                {product && <AddToCartButton product={product} />}
               </div>
               <div className="mt-6 text-center">
                 <div className="group inline-flex text-sm text-medium">

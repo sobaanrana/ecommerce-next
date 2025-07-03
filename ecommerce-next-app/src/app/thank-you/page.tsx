@@ -3,6 +3,8 @@
 import { ReceiptEmailHtml } from "@/components/emails/ReceiptEmail";
 // import { useUser } from "@/hooks/context/userContext";
 import { formatPrice } from "@/lib/utils";
+import { Customer } from "@/types/customer";
+import { Order } from "@/types/order";
 // import { Product } from "@/types/product";
 import { sendEmailToBackend } from "@/utils/sendReceiptEmail";
 import Image from "next/image";
@@ -22,9 +24,12 @@ const ThankyouPage = () => {
   // const orderId = searchParams.get("orderId");
   // const { user } = useUser();
 
-  const [orderDetails, setOrderDetails] = useState<unknown>(null);
+  const [orderDetails, setOrderDetails] = useState<Order | null>(null);
 
-  const [customerDetails, setCustomerDetails] = useState<unknown>(null);
+  const [customerDetails, setCustomerDetails] = useState<Customer | null>(null);
+
+  console.log("Order ID:", orderDetails);
+  console.log("Customer Details:", customerDetails);
 
   const transactionFee = 1;
   //   if (!user)
@@ -145,7 +150,7 @@ const ThankyouPage = () => {
             email: customerDetails.email,
             date: new Date(),
             orderId: orderDetails._id,
-            products: orderDetails.items,
+            products: orderDetails?.items,
           });
 
           console.log("Receipt Email HTML:", receiptEmailHtml);
@@ -256,7 +261,7 @@ const ThankyouPage = () => {
           <div className="flex justify-between">
             <p>Subtotal</p>
             <p className="text-gray-900">
-              {formatPrice(orderDetails?.totalAmount - transactionFee)}
+              {formatPrice(orderDetails?.totalAmount || 0 - transactionFee)}
             </p>
           </div>
 
@@ -268,7 +273,7 @@ const ThankyouPage = () => {
           <div className="flex items-center justify-between border-t border-gray-200 pt-6 text-gray-900">
             <p className="text-base">Total</p>
             <p className="text-base">
-              {formatPrice(orderDetails?.totalAmount)}
+              {formatPrice(orderDetails?.totalAmount || 0)}
             </p>
           </div>
         </div>

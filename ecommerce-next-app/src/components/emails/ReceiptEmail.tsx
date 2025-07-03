@@ -19,13 +19,13 @@ import {
 import * as React from "react";
 
 import { format } from "date-fns";
-import { Product } from "@/types/product";
+import { CartLineItem } from "@/types/order";
 
 interface ReceiptEmailProps {
   email: string;
   date: Date;
   orderId: string;
-  products: Product[];
+  products: CartLineItem[];
 }
 
 export const ReceiptEmail = ({

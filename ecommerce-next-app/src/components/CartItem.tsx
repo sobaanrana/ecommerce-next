@@ -4,7 +4,13 @@ import { Product } from "@/types/product";
 import { ImageIcon, X } from "lucide-react";
 import Image from "next/image";
 
-const CartItem = ({ keyIndex, product }: { key: number; product: Product }) => {
+const CartItem = ({
+  keyIndex,
+  product,
+}: {
+  keyIndex: number;
+  product: Product;
+}) => {
   const image = product?.images[0];
 
   const { removeItem } = useCart();
