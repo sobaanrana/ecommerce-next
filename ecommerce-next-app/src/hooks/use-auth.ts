@@ -39,8 +39,11 @@ export const useAuth = () => {
         setError(data.message || "Logout failed.");
       }
     } catch (error) {
-      console.log("Logout failed", error.message);
-      setError("Logout failed due to an error.");
+      if (error instanceof Error) {
+        // Handle specific error message
+        console.log("Logout failed", error.message);
+        setError("Logout failed due to an error.");
+      }
     } finally {
       setLoading(false); // Ensure loading is set to false after the API call
     }
