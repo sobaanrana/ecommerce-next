@@ -1,5 +1,3 @@
-import { ReceiptEmailHtml } from "@/components/emails/ReceiptEmail";
-
 interface sendEmailProps {
   ReceiptEmailHtml: string;
 }

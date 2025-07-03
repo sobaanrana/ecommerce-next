@@ -6,7 +6,7 @@ import { cn, formatPrice } from "@/lib/utils";
 import { Check, Loader2, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { use, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import { loadStripe } from "@stripe/stripe-js";
 

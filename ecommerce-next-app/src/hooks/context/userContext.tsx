@@ -1,9 +1,9 @@
 "use client";
 
 // import { getSignedUserData } from "@/lib/getSingedUserData";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { useAuth } from "../use-auth";
+// import { useAuth } from "../use-auth";
 import { getSignedUserData } from "@/lib/getSingedUserData";
 
 // Define the type for the user data

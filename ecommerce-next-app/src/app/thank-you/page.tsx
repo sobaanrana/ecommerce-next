@@ -3,12 +3,12 @@
 import { ReceiptEmailHtml } from "@/components/emails/ReceiptEmail";
 import { useUser } from "@/hooks/context/userContext";
 import { formatPrice } from "@/lib/utils";
-import { Product } from "@/types/product";
+// import { Product } from "@/types/product";
 import { sendEmailToBackend } from "@/utils/sendReceiptEmail";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // interface PageProps {
 //   searchParams: { [key: string]: string | string[] | undefined };

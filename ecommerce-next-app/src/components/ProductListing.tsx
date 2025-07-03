@@ -5,8 +5,8 @@ import Link from "next/link";
 import { Skeleton } from "./ui/skeleton";
 import { cn, formatPrice } from "@/lib/utils";
 import { PRODUCT_CATEGORIES } from "@/config";
-import { Product } from "@/payload-types";
 import { ImageSlider } from "./ImageSlider";
+import { Product } from "@/types/product";
 
 interface ProductListingProps {
   product: Product | null;
