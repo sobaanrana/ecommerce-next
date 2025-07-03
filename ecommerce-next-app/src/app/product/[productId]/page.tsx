@@ -9,17 +9,17 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import React from "react";
 
-interface pageProps {
-  params: {
-    productId: string;
-  };
-}
+// interface pageProps {
+//   params: {
+//     productId: string;
+//   };
+// }
 
 const BREADCRUMBS = [
   { id: 1, name: "Home", href: "/" },
   { id: 2, name: "Products", href: "/products" },
 ];
-const Page = ({ params }: pageProps) => {
+const Page = ({ params }) => {
   const { productId } = React.use(params);
 
   const [product, setProduct] = useState<unknown>(null);
