@@ -1,7 +1,6 @@
 "use client";
 
 import { PRODUCT_CATEGORIES } from "@/config";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import NavItem from "./NavItem";
 import { useOnClickOutside } from "@/hooks/use-on-click-outside";

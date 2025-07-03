@@ -26,7 +26,7 @@ export const ImageSlider = ({ images }: ImageSliderProps) => {
   });
 
   // Handle slide change and update activeIndex and slideConfig
-  const handleSlideChange = (swiper: any) => {
+  const handleSlideChange = (swiper: unknown) => {
     setActiveIndex(swiper.activeIndex);
     setSlideConfig({
       isBeginning: swiper.isBeginning,
