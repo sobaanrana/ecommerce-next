@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 const ThankyouPage = () => {
   //   const orderId = searchParams?.orderId;
 
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
   // const orderId = searchParams.get("orderId");
   // const { user } = useUser();

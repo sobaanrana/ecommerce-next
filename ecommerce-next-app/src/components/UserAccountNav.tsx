@@ -8,9 +8,7 @@ import {
   DropdownMenu,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuLabel,
 } from "./ui/dropdown-menu";
-import { useUser } from "@/hooks/context/userContext";
 import { useAuth } from "@/hooks/use-auth";
 
 const UserAccountNav = ({ user }: { user: object | null }) => {
