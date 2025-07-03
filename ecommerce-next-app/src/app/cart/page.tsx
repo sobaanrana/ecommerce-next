@@ -126,14 +126,14 @@ const CartPage = () => {
       const stripe = await stripePromise;
 
       // Redirect to the Stripe checkout page using the session ID
-      const { error } = await stripe.redirectToCheckout({
+      const result = await stripe?.redirectToCheckout({
         sessionId,
       });
 
       console.log("order is", orderId);
 
-      if (error) {
-        console.error("Stripe checkout error:", error);
+      if (result && result?.error) {
+        console.error("Stripe checkout error:", result?.error);
         // Handle any errors that occur during the redirect
       }
     } catch (error) {
