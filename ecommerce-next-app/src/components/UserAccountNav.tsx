@@ -10,8 +10,9 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { useAuth } from "@/hooks/use-auth";
+import { User } from "@/types/user";
 
-const UserAccountNav = ({ user }: { user: object | null }) => {
+const UserAccountNav = ({ user }: { user: User | null }) => {
   console.log("user in user account nav", user);
 
   const { signOut } = useAuth();
@@ -25,7 +26,7 @@ const UserAccountNav = ({ user }: { user: object | null }) => {
 
       <DropdownMenuContent align="end" className="w-60  bg-white ">
         <div className="flex items-center justify-start gap-2 p-2">
-          <p className="font-medium text-sm  text-black">{user.name}</p>
+          <p className="font-medium text-sm  text-black">{user?.name}</p>
         </div>
 
         <DropdownMenuSeparator />
