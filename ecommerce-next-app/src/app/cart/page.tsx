@@ -6,7 +6,7 @@ import { cn, formatPrice } from "@/lib/utils";
 import { Check, Loader2, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { use, useEffect, useMemo, useState } from "react";
 
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -36,9 +36,25 @@ const CartPage = () => {
 
   //   const cartItems = items?.map(item => {item._id, })
 
-  const cartItems = [];
+  const cartItems: unknown = [];
 
-  const createLineItems = useMemo(() => {
+  // const createLineItems = useMemo(() => {
+  //   items?.forEach((item) => {
+  //     const existingItemIndex = cartItems?.findIndex(
+  //       (cItem) => cItem.productId === item?._id
+  //     );
+
+  //     if (existingItemIndex !== -1) {
+  //       // If the item already exists in the cart, increase the quantity
+  //       cartItems[existingItemIndex].quantity += 1;
+  //     } else {
+  //       // If the item doesn't exist in the cart, add it with quantity 1
+  //       cartItems.push({ productId: item._id, quantity: 1 });
+  //     }
+  //   });
+  // }, [items, cartItems]);
+
+  const createLineItems = () => {
     items?.forEach((item) => {
       const existingItemIndex = cartItems?.findIndex(
         (cItem) => cItem.productId === item?._id
@@ -52,7 +68,7 @@ const CartPage = () => {
         cartItems.push({ productId: item._id, quantity: 1 });
       }
     });
-  }, [items, cartItems]);
+  };
 
   console.log("cartItems are", cartItems);
   //   const createLineItems = () => {
@@ -68,6 +84,8 @@ const CartPage = () => {
   //   };
 
   const createCheckoutSession = async () => {
+    createLineItems(); // Create line items from cart items
+
     try {
       // Send cart items to backend for checkout session
       const response = await fetch(
@@ -108,16 +126,16 @@ const CartPage = () => {
       const stripe = await stripePromise;
 
       // Redirect to the Stripe checkout page using the session ID
-      // const { error } = await stripe.redirectToCheckout({
-      //   sessionId,
-      // });
+      const { error } = await stripe.redirectToCheckout({
+        sessionId,
+      });
 
       console.log("order is", orderId);
 
-      //   if (error) {
-      //     console.error("Stripe checkout error:", error);
-      //     // Handle any errors that occur during the redirect
-      //   }
+      if (error) {
+        console.error("Stripe checkout error:", error);
+        // Handle any errors that occur during the redirect
+      }
     } catch (error) {
       console.error("Checkout error:", error);
       //   setIsLoading(true);
