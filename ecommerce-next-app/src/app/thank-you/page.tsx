@@ -129,12 +129,12 @@ const ThankyouPage = () => {
   ];
 
   // Dummy ReceiptEmailProps
-  const dummyReceiptEmailProps = {
-    email: "testuser@example.com", // Dummy email address
-    date: new Date(), // Current date
-    orderId: "order-12345", // Dummy order ID
-    products: dummyProducts, // Array of dummy products
-  };
+  // const dummyReceiptEmailProps = {
+  //   email: "testuser@example.com", // Dummy email address
+  //   date: new Date(), // Current date
+  //   orderId: "order-12345", // Dummy order ID
+  //   products: dummyProducts, // Array of dummy products
+  // };
 
   useEffect(() => {
     const sendReceipt = async () => {
