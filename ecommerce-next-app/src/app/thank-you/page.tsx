@@ -101,32 +101,32 @@ const ThankyouPage = () => {
     // getOrder();
   }, []);
 
-  const dummyProducts = [
-    {
-      id: "1",
-      name: "Adidas Mens Fab Polo Shirt",
-      price: 30,
-      images: [
-        {
-          url: "https://via.placeholder.com/150",
-        },
-      ],
-      category: "Clothing",
-      description: "A comfortable and breathable polo shirt by Adidas.",
-    },
-    {
-      id: "2",
-      name: "Air Max Invigor Trainers Mens",
-      price: 120,
-      images: [
-        {
-          url: "https://via.placeholder.com/150",
-        },
-      ],
-      category: "Sports",
-      description: "Stylish trainers by Nike with excellent cushioning.",
-    },
-  ];
+  // const dummyProducts = [
+  //   {
+  //     id: "1",
+  //     name: "Adidas Mens Fab Polo Shirt",
+  //     price: 30,
+  //     images: [
+  //       {
+  //         url: "https://via.placeholder.com/150",
+  //       },
+  //     ],
+  //     category: "Clothing",
+  //     description: "A comfortable and breathable polo shirt by Adidas.",
+  //   },
+  //   {
+  //     id: "2",
+  //     name: "Air Max Invigor Trainers Mens",
+  //     price: 120,
+  //     images: [
+  //       {
+  //         url: "https://via.placeholder.com/150",
+  //       },
+  //     ],
+  //     category: "Sports",
+  //     description: "Stylish trainers by Nike with excellent cushioning.",
+  //   },
+  // ];
 
   // Dummy ReceiptEmailProps
   // const dummyReceiptEmailProps = {
