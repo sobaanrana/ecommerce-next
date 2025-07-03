@@ -43,6 +43,10 @@ export const useAuth = () => {
         // Handle specific error message
         console.log("Logout failed", error.message);
         setError("Logout failed due to an error.");
+      } else {
+        // Handle unknown errors
+        console.log("Logout failed", error);
+        setError("Logout failed due to an unknown error.");
       }
     } finally {
       setLoading(false); // Ensure loading is set to false after the API call
@@ -92,9 +96,14 @@ export const useAuth = () => {
       setUser(user);
       console.log(user, "user data");
     } catch (err) {
-      console.log("Error fetching user data:", err.message);
+      if (err instanceof Error) {
+        console.log("Error fetching user data:", err.message);
+        setError("Error fetching user data.");
+      } else {
+        console.log("Error fetching user data:", err);
+        setError("Error fetching user data.");
+      }
       setLoading(false);
-      setError("Error fetching user data.");
     }
   };
 
