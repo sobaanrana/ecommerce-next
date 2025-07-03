@@ -1,5 +1,8 @@
+"use client";
+
 import VerifyEmail from "@/components/VerifyEmail";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 // interface PageProps {
 //   searchParams?: {
@@ -7,13 +10,19 @@ import Image from "next/image";
 //   };
 // }
 
-interface PageProps {
-  searchParams?: Record<string, unknown>;
-}
+// interface PageProps {
+//   searchParams?: Record<string, unknown>;
+// }
 
-const VerifyEmailPage = ({ searchParams }: PageProps) => {
-  const token = searchParams?.token;
-  const toEmail = searchParams?.to;
+// const VerifyEmailPage = ({ searchParams }: PageProps) => {
+const VerifyEmailPage = () => {
+  const searchParams = useSearchParams();
+
+  // const token = searchParams?.token;
+  // const toEmail = searchParams?.to;
+
+  const token = searchParams.get("token"); // ?token=abc
+  const toEmail = searchParams.get("to");
 
   console.log(token);
   return (
