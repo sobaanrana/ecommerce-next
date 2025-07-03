@@ -59,9 +59,15 @@ const SignUpPage = () => {
       toast.success(`Verification email sent to ${email}`);
       router.push(`/verify-email?to=${email} `);
     } catch (err) {
-      console.log(err.message);
-      // toast.error("This email is already in use. Sign in instead!");
-      toast.error(err.message);
+      if (err instanceof Error) {
+        console.log(err.message);
+        toast.error(err.message);
+      } else {
+        // fallback for truly unknown errors
+        console.log(err);
+        toast.error("Invalid email or password");
+      }
+
       handleZodErrors();
     }
   };

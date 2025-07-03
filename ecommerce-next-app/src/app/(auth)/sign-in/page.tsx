@@ -86,9 +86,14 @@ const SignInPage = () => {
 
       setUser(data.user); // Store the user data globally in context
     } catch (err) {
-      console.log(err.message);
-      // toast.error(err.message);
-      toast.error("Invalid email or password");
+      if (err instanceof Error) {
+        console.log(err.message);
+        toast.error(err.message);
+      } else {
+        // fallback for truly unknown errors
+        console.log(err);
+        toast.error("Invalid email or password");
+      }
 
       handleZodErrors();
     }
