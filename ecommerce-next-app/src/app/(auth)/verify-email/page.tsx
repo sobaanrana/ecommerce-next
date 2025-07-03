@@ -2,9 +2,7 @@ import VerifyEmail from "@/components/VerifyEmail";
 import Image from "next/image";
 
 interface PageProps {
-  searchParams?: {
-    [key: string]: string | string[] | undefined;
-  };
+  searchParams?: Record<string, string | string[] | undefined>;
 }
 
 const VerifyEmailPage = ({ searchParams }: PageProps) => {
