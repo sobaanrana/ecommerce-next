@@ -26,7 +26,11 @@ export const getSignedUserData = async (token: string) => {
     console.log(user);
     return user;
   } catch (err) {
-    console.error("Error fetching user data:", err.message);
-    throw err; // Re-throw the error to be handled in the calling component or function
+    if (err instanceof Error) {
+      console.error("Error fetching user data:", err.message);
+    } else {
+      console.error("Error fetching user data:", err);
+    }
+    throw err; // Still re-throw for upstream handling
   }
 };
