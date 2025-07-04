@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 // import { getSignedUser } from "@/lib/getSingedUser";
 // import { cookies } from "next/headers";
 import { UserProvider } from "@/hooks/context/userContext";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,13 +55,14 @@ export default function RootLayout({
           geistSans.className
         )}
       >
-        <main className="relative flex flex-col min-h-screen">
-          <UserProvider>
-            <Navbar />
-            <div className="flex-grow flex-1"> {children}</div>
-          </UserProvider>
-        </main>
-
+        <Suspense fallback={<div>Loading...</div>}>
+          <main className="relative flex flex-col min-h-screen">
+            <UserProvider>
+              <Navbar />
+              <div className="flex-grow flex-1"> {children}</div>
+            </UserProvider>
+          </main>
+        </Suspense>
         <Toaster position="top-center" richColors />
       </body>
     </html>
