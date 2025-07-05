@@ -9,6 +9,7 @@ import Cart from "./Cart";
 import UserAccountNav from "./UserAccountNav";
 import { useUser } from "@/hooks/context/userContext";
 import { User } from "@/types/user";
+import Image from "next/image";
 
 const Navbar = () => {
   // const { user, loading, error, signOut, getSignedUserData } = useAuth(); // Get user, loading, error, and signOut from the hook
@@ -24,16 +25,22 @@ const Navbar = () => {
   // }, []); // Empty dependency array means it runs only on mount
 
   return (
-    <div className="bg-white sticky z-50 top-0 inset-x-0 h-16">
+    <div className="bg-white sticky z-50 top-0 inset-x-0 h-18">
       <header className="relative bg-white">
         <MaxWidthWrapper>
           <div className="border-b border-gray-200">
-            <div className="flex h-16 items-center">
+            <div className="flex h-18 items-center">
               {/* TODO : Mobile Nav */}
 
-              <div className="ml-4 flex lg:ml-0">
-                <Link href="/">
-                  <Icons.logo className="h-10 w-10" />
+              <div className="ml-4 flex lg:ml-0 ">
+                <Link href="/" className="h-18 w-20 relative">
+                  {/* <Icons.logo className="h-10 w-10" /> */}
+                  <Image
+                    src={"/logos/logo.png"}
+                    fill
+                    className="object-contain"
+                    alt="NextCart"
+                  />
                 </Link>
               </div>
 

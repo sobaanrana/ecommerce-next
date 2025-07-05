@@ -12,6 +12,7 @@ import { z } from "zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { useUser } from "@/hooks/context/userContext";
+import Image from "next/image";
 
 const SignInPage = () => {
   const searchParams = useSearchParams();
@@ -119,7 +120,16 @@ const SignInPage = () => {
       <div className="container relative flex pt-20 flex-col items-center justify-center lg:px-0">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col items-center space-y-2 text-center">
-            <Icons.logo className="h-20 w-20" />
+            {/* <Icons.logo className="h-20 w-20" /> */}
+            <Link href="/" className="h-20 w-20 relative">
+              {/* <Icons.logo className="h-10 w-10" /> */}
+              <Image
+                src={"/logos/logo.png"}
+                fill
+                className="object-contain"
+                alt="NextCart"
+              />
+            </Link>
             <h1 className="text-2xl font-semibold tracking-tight">
               Sign in to your {isSeller && "seller"} account
             </h1>

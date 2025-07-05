@@ -4,40 +4,40 @@ export const PRODUCT_CATEGORIES = [
     value: "clothing" as const,
     featured: [
       {
-        name: "Editor picks",
+        name: "Men",
         href: "#",
-        imageSrc: "/nav/clothing/mixed.jpg",
+        imageSrc: "/categories/clothing/men.png",
       },
       {
-        name: "New Arrivals",
+        name: "Women",
         href: "#",
-        imageSrc: "/nav/clothing/mixed.jpg",
+        imageSrc: "/categories/clothing/women.png",
       },
       {
-        name: "Bestsellers",
+        name: "Kids",
         href: "#",
-        imageSrc: "/nav/clothing/mixed.jpg",
+        imageSrc: "/categories/clothing/kids.png",
       },
     ],
   },
   {
-    label: "Electronics",
+    label: "Footwear",
     value: "electronics" as const,
     featured: [
       {
-        name: "Favourite Picks",
+        name: "Men",
         href: "#",
-        imageSrc: "/nav/clothing/mixed.jpg",
+        imageSrc: "/categories/footwear/men.jpg",
       },
       {
-        name: "New Arrivals",
+        name: "Women",
         href: "#",
-        imageSrc: "/nav/clothing/mixed.jpg",
+        imageSrc: "/categories/footwear/women.jpg",
       },
       {
-        name: "Bestsellers",
+        name: "Kids",
         href: "#",
-        imageSrc: "/nav/clothing/mixed.jpg",
+        imageSrc: "/categories/footwear/kids.jpg",
       },
     ],
   },
