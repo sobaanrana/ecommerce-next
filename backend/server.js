@@ -57,6 +57,9 @@ app.use("/api/order", orderRoutes);
 const receiptEmailRoutes = require("./routes/ReceiptEmailRoutes");
 app.use("/api/send-receipt", receiptEmailRoutes);
 
+const categoryRoutes = require("./routes/CategoryRoutes");
+app.use("/api/categories", categoryRoutes);
+
 const authMiddleware = require("./middleware/authMiddleware");
 
 app.get("/api/protected", authMiddleware, (req, res) => {
@@ -64,6 +67,7 @@ app.get("/api/protected", authMiddleware, (req, res) => {
     message: `Hello user ${req.user.userId}, role: ${req.user.role}`,
   });
 });
+
 // Connect to MongoDB
 mongoose
   .connect(process.env.MONGO_URI)
