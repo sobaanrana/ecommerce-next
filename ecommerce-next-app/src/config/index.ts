@@ -27,17 +27,17 @@ export const PRODUCT_CATEGORIES = [
       {
         name: "Men",
         href: "#",
-        imageSrc: "/categories/footwear/men.jpg",
+        imageSrc: "/categories/footwear/men.png",
       },
       {
         name: "Women",
         href: "#",
-        imageSrc: "/categories/footwear/women.jpg",
+        imageSrc: "/categories/footwear/women.png",
       },
       {
         name: "Kids",
         href: "#",
-        imageSrc: "/categories/footwear/kids.jpg",
+        imageSrc: "/categories/footwear/kids.png",
       },
     ],
   },
