@@ -1,3 +1,4 @@
+const { Schema } = require("mongoose");
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema(
@@ -18,9 +19,11 @@ const productSchema = new mongoose.Schema(
       min: 0,
     },
     category: {
-      type: String,
+      // type: String,
+      type: Schema.Types.ObjectId,
+      ref: "Category",
       required: true,
-      enum: ["electronics", "clothing", "home", "beauty", "sports", "men"], // Modify categories as per your needs
+      // enum: ["electronics", "clothing", "home", "beauty", "sports", "men"], // Modify categories as per your needs
     },
     images: [
       {

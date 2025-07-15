@@ -55,9 +55,23 @@ const getProducts = async (req, res) => {
 
     // Fetch products with pagination
     const products = await Product.find(category ? { category } : {})
-      .populate("images", "url") // Populate only necessary fields like URL
+      // .populate("images", "url") // Populate only necessary fields like URL
       .skip(skip)
-      .limit(limit);
+      .limit(limit)
+      .populate([
+        {
+          path: "images",
+          select: "url",
+        },
+        {
+          path: "category",
+          select: "name",
+          populate: {
+            path: "parent",
+            select: "name",
+          },
+        },
+      ]);
 
     if (!products || products.length === 0) {
       return res.status(404).json({ message: "No products found" });
@@ -88,7 +102,23 @@ const getProducts = async (req, res) => {
 const getProductByID = async (req, res) => {
   const productId = req.params.id;
   try {
-    const product = await Product.findById(productId).populate("images", "url"); // Populate only necessary fields like URL
+    const product = await Product.findById(productId)
+      // .populate("images", "url"); // Populate only necessary fields like URL
+      .populate([
+        {
+          path: "images",
+          select: "url",
+        },
+        {
+          path: "category",
+          select: "name",
+          populate: {
+            path: "parent",
+            select: "name",
+          },
+        },
+      ]);
+
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
