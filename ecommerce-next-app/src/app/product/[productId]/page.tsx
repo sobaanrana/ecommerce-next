@@ -90,7 +90,7 @@ const Page = ({ params }: any) => {
                 </p>
 
                 <div className="ml-4 border-l text-muted-foreground border-gray-300 pl-4">
-                  {product?.category}
+                  {product?.category?.parent?.name} / {product?.category?.name}
                 </div>
               </div>
 

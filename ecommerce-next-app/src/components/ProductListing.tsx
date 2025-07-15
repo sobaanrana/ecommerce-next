@@ -27,7 +27,7 @@ const ProductListing = ({ product, index }: ProductListingProps) => {
   if (!product || !isVisible) return <ProductPlaceholder />;
 
   const label = PRODUCT_CATEGORIES.find(
-    ({ value }) => value === product.category
+    ({ value }) => value === product.category?.parent?.name
   )?.label;
 
   //   const validUrls = product.images

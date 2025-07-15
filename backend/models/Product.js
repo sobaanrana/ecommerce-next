@@ -31,12 +31,12 @@ const productSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Media", // Reference to the Media model
         required: true,
-        validate: {
-          validator: function (value) {
-            return value.length >= 1 && value.length <= 4; // Ensure 1 to 4 images
-          },
-          message: "You can upload a maximum of 4 images.",
-        },
+        // validate: {
+        //   validator: function (value) {
+        //     return value.length >= 1 && value.length <= 4; // Ensure 1 to 4 images
+        //   },
+        //   message: "You can upload a maximum of 4 images.",
+        // },
       },
     ],
     stock: {

@@ -1,7 +1,7 @@
 export const PRODUCT_CATEGORIES = [
   {
     label: "Clothing",
-    value: "clothing" as const,
+    value: "Clothing" as const,
     featured: [
       {
         name: "Men",
@@ -22,7 +22,7 @@ export const PRODUCT_CATEGORIES = [
   },
   {
     label: "Footwear",
-    value: "electronics" as const,
+    value: "Footwear" as const,
     featured: [
       {
         name: "Men",
