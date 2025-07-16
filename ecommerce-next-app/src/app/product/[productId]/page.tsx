@@ -144,12 +144,15 @@ const Page = ({ params }: any) => {
         </div>
       </div>
 
-      <ProductReel
-        href="/products"
-        query={{ category: product?.category, limit: 4 }}
-        title={`Similar ${product?.category}`}
-        subtitle={`Browse similar high-quality ${product?.category} just like '${product?.name}'`}
-      />
+      {/* Similar products section */}
+      {product && (
+        <ProductReel
+          href="/products"
+          query={{ category: product?.category?._id, limit: 4 }}
+          title={`Similar Products`}
+          subtitle={`Browse similar high-quality ${product?.category?.name} ${product?.category?.parent?.name} just like '${product?.name}'`}
+        />
+      )}
     </MaxWidthWrapper>
   );
 };

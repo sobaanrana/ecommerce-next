@@ -19,11 +19,17 @@ const ProductReel = (props: ProductReelProps) => {
 
   const fetchProducts = async () => {
     let getUrl = "";
-    if (query) {
+    if (query?.limit && query?.category) {
       getUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/products?limit=${query.limit}&category=${query.category}`;
     } else {
-      getUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/products?limit=4`;
+      getUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/products?limit=${query?.limit || 8}`;
     }
+
+    console.log(
+      "Fetching products from:",
+      getUrl,
+      query?.limit && query?.category
+    );
 
     try {
       const response = await fetch(getUrl);

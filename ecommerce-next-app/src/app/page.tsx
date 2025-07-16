@@ -39,14 +39,18 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
-            <Link href="/products" className={buttonVariants()}>
+            <Link href="/collection" className={buttonVariants()}>
               Browse Trending
             </Link>
             <Button variant="ghost">Our Quality Promise &rarr;</Button>
           </div>
         </div>
 
-        <ProductReel title="Brand new" href="/products" />
+        <ProductReel
+          title="Brand new"
+          href="/collection"
+          query={{ limit: 4 }}
+        />
       </MaxWidthWrapper>
       <section className="border-t border-gray-200 bg-gray-50">
         <MaxWidthWrapper className="py-20">
