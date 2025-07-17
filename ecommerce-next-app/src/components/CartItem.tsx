@@ -43,7 +43,9 @@ const CartItem = ({
             </span>
 
             <span className="line-clamp-1 text-xs capitalize text-muted-foreground">
-              {product.category}
+              {product.category
+                ? `${product.category.name} ${product.category.parent.name} `
+                : "No Category"}
             </span>
 
             <div className="mt-4 text-xs text-muted-foreground">

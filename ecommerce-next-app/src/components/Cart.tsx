@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 
 const Cart = () => {
   const { items } = useCart();
+  console.log("Cart items", items);
   const itemCount = items.length;
 
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -55,7 +56,7 @@ const Cart = () => {
           <div className="p-4">
             <div className="flex w-full flex-col pr-6">
               <ScrollArea>
-                {items.map((product, index) => (
+                {items?.map((product, index) => (
                   <CartItem key={index} product={product} keyIndex={index} />
                 ))}
               </ScrollArea>
