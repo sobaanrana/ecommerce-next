@@ -10,20 +10,17 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import React from "react";
 
-// interface pageProps {
-//   params: {
-//     productId: string;
-//   };
-// }
+interface pageParams {
+  productId: string;
+}
 
 const BREADCRUMBS = [
   { id: 1, name: "Home", href: "/" },
   { id: 2, name: "Products", href: "/products" },
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Page = ({ params }: any) => {
-  const { productId } = params;
+const Page = ({ params }: { params: Promise<pageParams> }) => {
+  const { productId } = React.use(params);
 
   const [product, setProduct] = useState<Product | null>(null);
 
