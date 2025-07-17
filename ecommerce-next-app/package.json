@@ -37,7 +37,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.1",
     "sharp": "^0.34.1",
-    "sonner": "^2.0.3",
+    "sonner": "^2.0.6",
     "swiper": "^6.8.4",
     "tailwind-merge": "^3.2.0",
     "zod": "^3.24.3",
