@@ -291,7 +291,10 @@ const CartPage = () => {
 
                             <div className="mt-1 flex text-sm">
                               <p className="text-muted-foreground">
-                                Category: {product.category}
+                                Category:{" "}
+                                {product.category
+                                  ? `${product.category.name} ${product.category.parent.name} `
+                                  : "No Category"}
                               </p>
                             </div>
 
